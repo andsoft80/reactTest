@@ -114,8 +114,8 @@ function NavBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleMenuClose} component={Link} to='/profile'>Profile</MenuItem>
+      <MenuItem onClick={handleMenuClose} component={Link} to='/account'>My account</MenuItem>
     </Menu>
   );
 
@@ -130,16 +130,17 @@ function NavBar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <IconButton aria-label="show 4 new mails" color="inherit">
+      <MenuItem component={Link} to='/mails'>
+
+        <IconButton aria-label="show 4 new mails" color="inherit" >
           <Badge badgeContent={4} color="secondary">
             <MailIcon />
           </Badge>
         </IconButton>
         <p>Messages</p>
       </MenuItem>
-      <MenuItem>
-        <IconButton aria-label="show 11 new notifications" color="inherit">
+      <MenuItem component={Link} to='/alerts'>
+        <IconButton aria-label="show 11 new notifications" color="inherit" >
           <Badge badgeContent={11} color="secondary">
             <NotificationsIcon />
           </Badge>
@@ -164,7 +165,7 @@ function NavBar() {
     <div className={classes.grow}>
       <AppBar position="static">
         <Toolbar>
-        <MyDrawer/>
+          <MyDrawer />
           {/* <IconButton
             edge="start"
             className={classes.menuButton}
@@ -191,44 +192,48 @@ function NavBar() {
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <IconButton aria-label="show 4 new mails" color="inherit">
+
+            <IconButton aria-label="show 4 new mails" color="inherit" component={Link} to='/mails'>
               <Badge badgeContent={4} color="secondary">
                 <MailIcon />
               </Badge>
+              
+
             </IconButton>
-            <IconButton aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={17} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
+            
+              <IconButton aria-label="show 17 new notifications" color="inherit" component={Link} to='/alerts'>
+                <Badge badgeContent={17} color="secondary">
+                  <NotificationsIcon />
+                </Badge>
+              </IconButton>
+              <IconButton
+                edge="end"
+                aria-label="account of current user"
+                aria-controls={menuId}
+                aria-haspopup="true"
+                onClick={handleProfileMenuOpen}
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
           </div>
-          <div className={classes.sectionMobile}>
-            <IconButton
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <MoreIcon />
-            </IconButton>
-          </div>
+            <div className={classes.sectionMobile}>
+              <IconButton
+                aria-label="show more"
+                aria-controls={mobileMenuId}
+                aria-haspopup="true"
+                onClick={handleMobileMenuOpen}
+                color="inherit"
+              >
+                <MoreIcon />
+              </IconButton>
+            </div>
         </Toolbar>
       </AppBar>
-      {renderMobileMenu}
-      {renderMenu}
+        {renderMobileMenu}
+        {renderMenu}
     </div>
-  );
-}
-
+      );
+    }
+    
 export default NavBar;
