@@ -17,6 +17,7 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 import StarBorder from '@material-ui/icons/StarBorder';
 import Collapse from '@material-ui/core/Collapse';
 import ListSubheader from '@material-ui/core/ListSubheader';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
     list: {
@@ -86,10 +87,14 @@ export default function MyDrawer() {
                     </ListSubheader>
                 }
             >
-                <ListItemLink href="/mama" >
+                <ListItem button component={Link} to='/'>
                     <ListItemIcon><MailIcon /></ListItemIcon>
-                    <ListItemText primary="Новые" />
-                </ListItemLink>
+                    <ListItemText primary="Домой" />
+                </ListItem>
+                <ListItem button component={Link} to='/orders'>
+                    <ListItemIcon><MailIcon /></ListItemIcon>
+                    <ListItemText primary="Заказы" />
+                </ListItem>
                 {/* {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
 
                     <ListItemLink href="/mama" key={text}>
@@ -108,10 +113,10 @@ export default function MyDrawer() {
             <Divider />
             <List>
 
-                <ListItemLink href="/papa" >
+                <ListItem button component={Link} to='/myorders'>
                     <ListItemIcon><MailIcon /></ListItemIcon>
-                    <ListItemText primary="Закрытые" />
-                </ListItemLink>
+                    <ListItemText primary="Мои заказы" />
+                </ListItem>
                 {/* {['All mail', 'Trash', 'Spam'].map((text, index) => (
                     <ListItem button key={text}>
                         <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
@@ -187,7 +192,7 @@ export default function MyDrawer() {
       <Button onClick={toggleDrawer('top', true)}>Open Top</Button>
       <Button onClick={toggleDrawer('bottom', true)}>Open Bottom</Button> */}
             <Drawer open={state.left} onClose={toggleDrawer('left', false)}>
-                
+
                 {sideList('left')}
             </Drawer>
             {/* <Drawer anchor="top" open={state.top} onClose={toggleDrawer('top', false)}>

@@ -30,7 +30,7 @@ import React, { Component } from 'react';
 // import TextField from '@material-ui/core/TextField';
 import Navbar from './Navbar';
 // import MediaCard from './Cards';
-// import SideBar from './sidebar';
+//  import SideBar from './sidebar';
 
 
 class App extends Component {
