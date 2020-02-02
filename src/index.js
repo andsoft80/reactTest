@@ -5,10 +5,18 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'typeface-roboto';
 import { BrowserRouter } from 'react-router-dom';
+import { createStore, combineReducers } from 'redux';
+import { Provider } from 'react-redux';
+import { rootReducer, initialState } from './reducers';
+
+const store = createStore(rootReducer, initialState);
+
 
 ReactDOM.render((
     <BrowserRouter>
-        <App />
+        <Provider store={store}>
+            <App />
+        </Provider>
     </BrowserRouter>
 ), document.getElementById('root'));
 

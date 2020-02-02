@@ -12,7 +12,8 @@ import IMG from './logo.svg';
 
 const styles = {
   card: {
-    maxWidth: 345,
+    maxWidth: 300,
+    
   },
   media: {
     height: 140,

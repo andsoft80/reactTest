@@ -17,6 +17,7 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import MyDrawer from './Drawer';
 import { Link } from 'react-router-dom';
 
+
 const useStyles = makeStyles(theme => ({
   grow: {
     flexGrow: 1,
@@ -78,7 +79,9 @@ const useStyles = makeStyles(theme => ({
     },
   },
 }));
-function NavBar() {
+function NavBar(props) {
+  const alert = props.alert;
+  
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -195,7 +198,7 @@ function NavBar() {
             </IconButton>
             
               <IconButton aria-label="show 17 new notifications" color="inherit" component={Link} to='/alerts'>
-                <Badge badgeContent={17} color="secondary">
+                <Badge badgeContent={props.alert} color="secondary">
                   <NotificationsIcon />
                 </Badge>
               </IconButton>
@@ -228,5 +231,6 @@ function NavBar() {
     </div>
       );
     }
-    
-export default NavBar;
+
+  
+export default (NavBar);
