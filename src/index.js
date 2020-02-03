@@ -8,6 +8,8 @@ import { BrowserRouter } from 'react-router-dom';
 import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import { rootReducer, initialState } from './reducers';
+import { Switch, Route } from 'react-router-dom';
+import SignUp from './SignUp';
 
 const store = createStore(rootReducer, initialState);
 
@@ -15,8 +17,17 @@ const store = createStore(rootReducer, initialState);
 ReactDOM.render((
     <BrowserRouter>
         <Provider store={store}>
+            <main>
+                <Switch>
+                    <Route exact path='/signup' component={SignUp} />
+
+
+                </Switch>
+            </main>
             <App />
+
         </Provider>
+
     </BrowserRouter>
 ), document.getElementById('root'));
 

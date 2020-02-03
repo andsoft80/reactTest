@@ -11,3 +11,9 @@ export function addAlert(c) {
       payload: c
     }
   }  
+  export function setAlert(c) {
+    return {
+      type: 'SET_ALERT',
+      payload: c
+    }
+  } 

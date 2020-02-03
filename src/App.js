@@ -6,6 +6,7 @@ import Main from './Main';
 import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
+import SignIn from './SignIn';
 
 const useStyles = theme => ({
   root: {
@@ -21,45 +22,57 @@ const useStyles = theme => ({
 });
 
 class App extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
   }
-  
+
   render() {
     const { classes } = this.props;
-    return (
-      <div>
+    if (this.props.login) {
+      return (
 
-        <Navbar alert = {this.props.alert}/>
-        <div style={{ padding: 10 }}>
-          <Grid
-            container
-            //item xs={12}
-            direction="raw"
-            justify="flex-start"
-            alignItems="center"
-            spacing={1}
-            
-          >
-            <Grid  item><Main /></Grid>
+        <div>
 
-            
+          <Navbar alert={this.props.alert} />
+          <div style={{ padding: 10 }}>
+            <Grid
+              container
+              //item xs={12}
+              direction="raw"
+              justify="flex-start"
+              alignItems="center"
+              spacing={1}
+
+            >
+              <Grid item><Main /></Grid>
 
 
-            {/* <Paper  className={classes.paper}/>
+
+
+              {/* <Paper  className={classes.paper}/>
             <Paper  className={classes.paper}/>
             <Paper  className={classes.paper}/> */}
-          </Grid>
+            </Grid>
+          </div>
+
         </div>
 
-      </div>
-    );
+      );
+    }
+    else {
+      return (
+        <SignIn />
+
+      );
+    }
   }
 }
 const mapStateToProps = store => {
   console.log(store) // посмотрим, что же у нас в store?
   return {
-    alert: store.alert
+    alert: store.alert,
+    login: store.login,
+    token: store.token
   }
-}  
+}
 export default connect(mapStateToProps)(App);
