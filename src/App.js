@@ -7,6 +7,11 @@ import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import SignIn from './SignIn';
+import {
+
+  Redirect
+
+} from "react-router-dom";
 
 const useStyles = theme => ({
   root: {
@@ -61,7 +66,7 @@ class App extends Component {
     }
     else {
       return (
-        <SignIn />
+        <Redirect to='/signin'/>
 
       );
     }

@@ -18,10 +18,10 @@ class Home extends React.Component {
   }
 
   render() {
-    if (this.props.alert<5) {
+    //if (this.props.alert<5) {
       return <button onClick={this.props.addAlert}>{this.props.text}</button>;
-    }
-  else return <p>{"Empty component"}</p>
+   /// }
+  //else return <p>{"Empty component"}</p>
   }
 
   componentDidMount() {
@@ -41,7 +41,7 @@ const mapStateToProps = store => {
 const mapDispatchToProps = (dispatch) => {
   return {
     addAlert: () => {
-      dispatch(addAlert(1));
+      dispatch(setAlert(10));
     }
   }
 };

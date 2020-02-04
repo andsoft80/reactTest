@@ -10,6 +10,8 @@ import { Provider } from 'react-redux';
 import { rootReducer, initialState } from './reducers';
 import { Switch, Route } from 'react-router-dom';
 import SignUp from './SignUp';
+import SignIn from './SignIn';
+import ForgotPass from './ForgotPass';
 
 const store = createStore(rootReducer, initialState);
 
@@ -20,11 +22,14 @@ ReactDOM.render((
             <main>
                 <Switch>
                     <Route exact path='/signup' component={SignUp} />
+                    <Route exact path='/forgotpass' component={ForgotPass} />
+                    <Route exact path='/signin' component={SignIn} />
+                    <Route exact path='/' component={App} />
 
 
                 </Switch>
             </main>
-            <App />
+            
 
         </Provider>
 

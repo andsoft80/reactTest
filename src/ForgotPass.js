@@ -73,7 +73,7 @@ export default function SignIn() {
                     <LockOutlinedIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">
-                    Sign in
+                    Recover Password
         </Typography>
                 <form className={classes.form} noValidate>
                     <TextField
@@ -87,21 +87,7 @@ export default function SignIn() {
                         autoComplete="email"
                         autoFocus
                     />
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="password"
-                        label="Password"
-                        type="password"
-                        id="password"
-                        autoComplete="current-password"
-                    />
-                    <FormControlLabel
-                        control={<Checkbox value="remember" color="primary" />}
-                        label="Remember me"
-                    />
+
                     <Button
                         type="submit"
                         fullWidth
@@ -109,22 +95,17 @@ export default function SignIn() {
                         color="primary"
                         className={classes.submit}
                     >
-                        Sign In
+                        Send me
           </Button>
                     <Grid container>
-                        <Grid item xs>
-                            {/* <Link href="#" variant="body2">
-                                Forgot password?
-                            </Link> */}
-                            <NavLink to="/forgotpass"> {"Forgot password?"} </NavLink>
-                        </Grid>
+
                         <Grid item>
                             {/* <div>
                                 <Link href="#" onClick={click} variant="body2">
                                     {"Don't have an account? Sign Up"}
                                 </Link>
                             </div> */}
-                            <NavLink to="/signup"> {"Don't have an account? Sign Up"} </NavLink>
+                            <NavLink to="/signin"> {"Do you remember? Sign In"} </NavLink>
 
 
                         </Grid>
