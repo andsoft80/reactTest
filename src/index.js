@@ -24,7 +24,8 @@ ReactDOM.render((
                     <Route exact path='/signup' component={SignUp} />
                     <Route exact path='/forgotpass' component={ForgotPass} />
                     <Route exact path='/signin' component={SignIn} />
-                    <Route exact path='/' component={App} />
+                    <Route exact path='*' component={App} />
+                    {/* <Route exact path='/profile' component={App} /> */}
 
 
                 </Switch>

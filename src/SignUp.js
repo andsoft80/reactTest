@@ -15,6 +15,11 @@ import Container from '@material-ui/core/Container';
 import { NavLink } from 'react-router-dom';
 import { FormControl, Input, InputLabel, FormHelperText } from '@material-ui/core';
 import axios from 'axios';
+import {
+
+  Redirect
+
+} from "react-router-dom";
 
 
 function Copyright() {
@@ -59,6 +64,10 @@ class SignUp extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
 
   }
+  state = {
+    redirect: false
+  }
+
   handleChange(event) {
     // this.setState({value: event.target.value});
   }
@@ -80,8 +89,14 @@ class SignUp extends React.Component {
     
     axios.post("http://localhost:8080/signup", body, config)
       .then(response => {
-        console.log(response);
-        alert(JSON.stringify(response));
+        //console.log(response);
+        //alert(JSON.stringify(response));
+        if(response.data!='fail'){
+          this.setState({ redirect: true })
+        }
+        else{
+          alert("User with similar email alredy exist!");
+        }
       })
       .catch(error => {
         console.log(error);
@@ -100,6 +115,11 @@ class SignUp extends React.Component {
 
   render() {
     const { classes } = this.props;
+    const { redirect } = this.state;
+
+    if (redirect) {
+      return <Redirect to='/signin'/>;
+    }
     return (
       <Container component="main" maxWidth="xs">
         <CssBaseline />

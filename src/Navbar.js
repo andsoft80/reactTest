@@ -16,6 +16,7 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import MyDrawer from './Drawer';
 import { Link } from 'react-router-dom';
+import Auth from './Authcontrol'
 
 
 const useStyles = makeStyles(theme => ({
@@ -80,7 +81,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 function NavBar(props) {
-  const alert = props.alert;
+  
   
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -97,7 +98,14 @@ function NavBar(props) {
     setMobileMoreAnchorEl(null);
   };
 
-  const handleMenuClose = () => {
+  const handleMenuClose = event => {
+    
+    setAnchorEl(null);
+    handleMobileMenuClose();
+  };
+
+  const handleMenuCloseLO = event => {
+    Auth.deauthenticateUser();
     setAnchorEl(null);
     handleMobileMenuClose();
   };
@@ -119,6 +127,7 @@ function NavBar(props) {
     >
       <MenuItem onClick={handleMenuClose} component={Link} to='/profile'>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose} component={Link} to='/account'>My account</MenuItem>
+      <MenuItem onClick={handleMenuCloseLO} component={Link} to='/signin'>Log out</MenuItem>
     </Menu>
   );
 

@@ -8,7 +8,8 @@ const Main = (props) => (
     <Switch>
       <Route exact path='/profile' component={MediaCard} />
       
-        <Route exact path='/' render={(props) => <Home text="Add Alert" {...props} />} />
+      <Route exact path='/' render={(props) => <Home text="Add Alert" {...props} />} />
+      
       
 
     </Switch>

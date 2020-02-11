@@ -16,6 +16,10 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
+import { setAuth } from './actions/auth';
+import { connect } from 'react-redux';
+import Auth from './Authcontrol'
+
 import {
 
     Redirect
@@ -65,127 +69,159 @@ function click() {
 
 class SignIn extends React.Component {
     constructor(props) {
-      super(props);
-      this.state = { value: 'coconut' };
-  
-      this.handleChange = this.handleChange.bind(this);
-      this.handleSubmit = this.handleSubmit.bind(this);
-  
+        super(props);
+        this.state = { value: 'coconut' };
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+
+    }
+
+    state = {
+        redirect: false
     }
     handleChange(event) {
-      // this.setState({value: event.target.value});
+        // this.setState({value: event.target.value});
     }
-  
-    handleSubmit(event) {
-      
-      const data = new FormData(event.target);
-      //alert(data.get('promo'));
-  
-      const body = new URLSearchParams(data);
-      // for (const pair of data) {
-      //   body.append(pair[0], pair[1]);
-      // }
-      //alert(body);
-  
-      const config = {
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-      }
-      
-      axios.post("http://localhost:8080/login", body, config)
-        .then(response => {
-          console.log(response);
-          alert(JSON.stringify(response));
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    //   fetch("http://localhost:8080/signup", {
-    //     body: body,
-    //     headers: {
-    //         "Content-Type": "application/x-www-form-urlencoded",
-    //         // "Content-Type": "multipart/form-data",
-    //     },
-    //     method: "post",
-    // })
-    event.preventDefault();
-  
-    }
-    render(){
-        const { classes } = this.props;
 
-    return (
-        <Container component="main" maxWidth="xs">
-            <CssBaseline />
-            <div className={classes.paper}>
-                <Avatar className={classes.avatar}>
-                    <LockOutlinedIcon />
-                </Avatar>
-                <Typography component="h1" variant="h5">
-                    Sign in
+    handleSubmit(event) {
+
+        const data = new FormData(event.target);
+        //alert(data.get('promo'));
+
+        const body = new URLSearchParams(data);
+        // for (const pair of data) {
+        //   body.append(pair[0], pair[1]);
+        // }
+        //alert(body);
+
+        const config = {
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+        }
+
+        axios.post("http://localhost:8080/login", body, config)
+            .then(response => {
+                //console.log(response);
+                if (response.data != 'fail') {
+                    Auth.authenticateUser(response.data._id);
+                    this.setState({ redirect: true })
+                    
+                    //alert(Auth.getUserId());
+
+                }
+                else {
+                    alert("Creditionals are wrong!");
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        //   fetch("http://localhost:8080/signup", {
+        //     body: body,
+        //     headers: {
+        //         "Content-Type": "application/x-www-form-urlencoded",
+        //         // "Content-Type": "multipart/form-data",
+        //     },
+        //     method: "post",
+        // })
+        event.preventDefault();
+
+    }
+    render() {
+        const { classes } = this.props;
+        const { redirect } = this.state;
+
+        if (redirect) {
+            
+            return <Redirect to='/' />;
+        }
+
+        return (
+            <Container component="main" maxWidth="xs">
+                <CssBaseline />
+                <div className={classes.paper}>
+                    <Avatar className={classes.avatar}>
+                        <LockOutlinedIcon />
+                    </Avatar>
+                    <Typography component="h1" variant="h5">
+                        Sign in
         </Typography>
-                {/* <form className={classes.form} noValidate action = "http://localhost:8080/login" method="POST"> */}
-                <form className={classes.form} noValidate onSubmit={this.handleSubmit}>
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="email"
-                        label="Email Address"
-                        name="email"
-                        autoComplete="email"
-                        autoFocus
-                    />
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="password"
-                        label="Password"
-                        type="password"
-                        id="password"
-                        autoComplete="current-password"
-                    />
-                    <FormControlLabel
-                        control={<Checkbox value="remember" color="primary" />}
-                        label="Remember me"
-                    />
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className={classes.submit}
-                    >
-                        Sign In
+                    {/* <form className={classes.form} noValidate action = "http://localhost:8080/login" method="POST"> */}
+                    <form className={classes.form} noValidate onSubmit={this.handleSubmit}>
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="email"
+                            label="Email Address"
+                            name="email"
+                            autoComplete="email"
+                            autoFocus
+                        />
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="password"
+                            label="Password"
+                            type="password"
+                            id="password"
+                            autoComplete="current-password"
+                        />
+                        <FormControlLabel
+                            control={<Checkbox value="remember" color="primary" />}
+                            label="Remember me"
+                        />
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            color="primary"
+                            className={classes.submit}
+                        >
+                            Sign In
           </Button>
-                    <Grid container>
-                        <Grid item xs>
-                            {/* <Link href="#" variant="body2">
+                        <Grid container>
+                            <Grid item xs>
+                                {/* <Link href="#" variant="body2">
                                 Forgot password?
                             </Link> */}
-                            <NavLink to="/forgotpass"> {"Forgot password?"} </NavLink>
-                        </Grid>
-                        <Grid item>
-                            {/* <div>
+                                <NavLink to="/forgotpass"> {"Forgot password?"} </NavLink>
+                            </Grid>
+                            <Grid item>
+                                {/* <div>
                                 <Link href="#" onClick={click} variant="body2">
                                     {"Don't have an account? Sign Up"}
                                 </Link>
                             </div> */}
-                            <NavLink to="/signup"> {"Don't have an account? Sign Up"} </NavLink>
+                                <NavLink to="/signup"> {"Don't have an account? Sign Up"} </NavLink>
 
 
+                            </Grid>
                         </Grid>
-                    </Grid>
-                </form>
-            </div>
-            <Box mt={8}>
-                <Copyright />
-            </Box>
-        </Container>
-     );
+                    </form>
+                </div>
+                <Box mt={8}>
+                    <Copyright />
+                </Box>
+            </Container>
+        );
     }
 }
+const mapStateToProps = store => {
+    console.log(store) // посмотрим, что же у нас в store?
+    return {
+      login: store.login
+    }
+  }
 
-export default withStyles(styles)(SignIn);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setAuth: () => {
+            dispatch(setAuth());
+        }
+    }
+};
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(SignIn));

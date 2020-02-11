@@ -7,6 +7,7 @@ import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import SignIn from './SignIn';
+import Auth from './Authcontrol'
 import {
 
   Redirect
@@ -33,7 +34,8 @@ class App extends Component {
 
   render() {
     const { classes } = this.props;
-    if (this.props.login) {
+    
+    if (Auth.isUserAuthenticated()) {
       return (
 
         <div>
