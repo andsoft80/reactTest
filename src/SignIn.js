@@ -10,11 +10,12 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import { NavLink } from 'react-router-dom';
+import axios from 'axios';
 import {
 
     Redirect
@@ -35,7 +36,7 @@ function Copyright() {
     );
 }
 
-const useStyles = makeStyles(theme => ({
+const styles = theme => ({
     paper: {
         marginTop: theme.spacing(8),
         display: 'flex',
@@ -53,7 +54,7 @@ const useStyles = makeStyles(theme => ({
     submit: {
         margin: theme.spacing(3, 0, 2),
     },
-}));
+});
 
 function click() {
     return (
@@ -62,8 +63,55 @@ function click() {
 
 }
 
-export default function SignIn() {
-    const classes = useStyles();
+class SignIn extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = { value: 'coconut' };
+  
+      this.handleChange = this.handleChange.bind(this);
+      this.handleSubmit = this.handleSubmit.bind(this);
+  
+    }
+    handleChange(event) {
+      // this.setState({value: event.target.value});
+    }
+  
+    handleSubmit(event) {
+      
+      const data = new FormData(event.target);
+      //alert(data.get('promo'));
+  
+      const body = new URLSearchParams(data);
+      // for (const pair of data) {
+      //   body.append(pair[0], pair[1]);
+      // }
+      //alert(body);
+  
+      const config = {
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+      }
+      
+      axios.post("http://localhost:8080/login", body, config)
+        .then(response => {
+          console.log(response);
+          alert(JSON.stringify(response));
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    //   fetch("http://localhost:8080/signup", {
+    //     body: body,
+    //     headers: {
+    //         "Content-Type": "application/x-www-form-urlencoded",
+    //         // "Content-Type": "multipart/form-data",
+    //     },
+    //     method: "post",
+    // })
+    event.preventDefault();
+  
+    }
+    render(){
+        const { classes } = this.props;
 
     return (
         <Container component="main" maxWidth="xs">
@@ -75,7 +123,8 @@ export default function SignIn() {
                 <Typography component="h1" variant="h5">
                     Sign in
         </Typography>
-                <form className={classes.form} noValidate action = "http://localhost:8080/login" method="POST">
+                {/* <form className={classes.form} noValidate action = "http://localhost:8080/login" method="POST"> */}
+                <form className={classes.form} noValidate onSubmit={this.handleSubmit}>
                     <TextField
                         variant="outlined"
                         margin="normal"
@@ -135,5 +184,8 @@ export default function SignIn() {
                 <Copyright />
             </Box>
         </Container>
-    );
+     );
+    }
 }
+
+export default withStyles(styles)(SignIn);

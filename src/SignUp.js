@@ -64,19 +64,38 @@ class SignUp extends React.Component {
   }
 
   handleSubmit(event) {
+    
     const data = new FormData(event.target);
+    //alert(data.get('promo'));
+
+    const body = new URLSearchParams(data);
+    // for (const pair of data) {
+    //   body.append(pair[0], pair[1]);
+    // }
+    //alert(body);
+
     const config = {
-      headers: { 'content-type': 'multipart/form-data' }
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     }
-    // alert(data.get('promo'));
-    axios.post("http://localhost:8080/signup", data, config)
+    
+    axios.post("http://localhost:8080/signup", body, config)
       .then(response => {
         console.log(response);
+        alert(JSON.stringify(response));
       })
       .catch(error => {
         console.log(error);
       });
-    event.preventDefault();
+  //   fetch("http://localhost:8080/signup", {
+  //     body: body,
+  //     headers: {
+  //         "Content-Type": "application/x-www-form-urlencoded",
+  //         // "Content-Type": "multipart/form-data",
+  //     },
+  //     method: "post",
+  // })
+  event.preventDefault();
+
   }
 
   render() {
