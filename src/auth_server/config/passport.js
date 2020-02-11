@@ -74,7 +74,7 @@ module.exports = function(passport) {
                     newUser.local.promo = req.body.promo;
                     
                 }
-                console.log(req.body.promo);
+                //console.log(req.body.promo);
 
                 // save the user
                 newUser.save(function(err) {
