@@ -4,6 +4,7 @@ import MediaCard from './Cards';
 import Home from './Home';
 import DxExp from './dxExp';
 import dxForm from './dxForm';
+import PlaceCard from './wfc_components/PlaceCard';
 
 const Main = (props) => (
   <main>
@@ -11,7 +12,7 @@ const Main = (props) => (
       <Route exact path='/profile' component={MediaCard} />
       
       {/* <Route exact path='/' render={(props) => <Home text="Add Alert" {...props} />} /> */}
-      <Route exact path='/' component={dxForm} />
+      <Route exact path='/' render={(props) => <PlaceCard locale="en" {...props} />}  />
       
 
     </Switch>
